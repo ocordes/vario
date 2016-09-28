@@ -57,3 +57,5 @@ class MainWindow( QtGui.QMainWindow ):
                 action.setData( QtGui.QVarian( fname ) )
                 self.connect( action, QtCore.SIGNAL( 'triggered()' ), self.laodFile )
                 self.fileMenu.addAction( action )
+        self.fileMenu.addSeparator()
+        self.fileMenu.addAction( self.fileMenuActions[-1] )

@@ -10,6 +10,8 @@ from ginga.misc import log
 from ginga.qtw.QtHelp import QtGui, QtCore
 from ginga.qtw.ImageViewCanvasQt import ImageViewCanvas
 
+from vario_gui import Vario_GUI
+
 
 class FitsViewer(QtGui.QMainWindow):
 
@@ -92,7 +94,8 @@ def main(options, args):
     # using null=True in this call instead of log_stderr=True
     logger = log.get_logger("example1", log_stderr=True)
 
-    w = FitsViewer(logger)
+    #w = FitsViewer(logger)
+    w = Vario_GUI( logger )
     w.resize(524, 540)
     w.show()
     app.setActiveWindow(w)
@@ -108,4 +111,3 @@ if __name__ == '__main__':
     main(None, sys.argv[1:])
 
 # END
-

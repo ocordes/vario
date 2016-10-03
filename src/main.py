@@ -96,7 +96,7 @@ def main(options, args):
 
     #w = FitsViewer(logger)
     w = Vario_GUI( logger )
-    w.resize(524, 540)
+    w.resize(600, 500)
     w.show()
     app.setActiveWindow(w)
     w.raise_()

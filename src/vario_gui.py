@@ -1,7 +1,7 @@
 # vario_gui.py
 #
 # written by: Oliver Cordes 2016-09-26
-# changed by: Oliver Cordes 2016-10-03
+# changed by: Oliver Cordes 2016-10-05
 
 import sys, os
 import logging
@@ -38,14 +38,13 @@ class Vario_GUI( MainWindow ):
         self.centralwidget = QtGui.QWidget( self )
         #hBoxlayout	= QtGui.QHBoxLayout( self.centralwidget )
         hBoxlayout	= QtGui.QHBoxLayout()
-        self.centralwidget.setLayout( hBoxlayout )
-        self.centralwidget.resize( 600, 500 )
+
 
         self.treeview = QtGui.QTreeView()
-        self.treeview.resize( 600, 100 )
+        #self.treeview.resize( 600, 100 )
 
         self.notebook = QtGui.QTabWidget()
-        self.notebook.resize( 600, 400 )
+        #self.notebook.resize( 600, 400 )
 
         self.tab1, name = self.create_tab1()
         self.notebook.addTab( self.tab1, name )
@@ -54,8 +53,18 @@ class Vario_GUI( MainWindow ):
         self.tab3, name = self.create_tab3()
         self.notebook.addTab( self.tab3, name )
 
-        hBoxlayout.addWidget( self.treeview )
-        hBoxlayout.addWidget( self.notebook )
+        #hBoxlayout.addWidget( self.treeview )
+        #hBoxlayout.addWidget( self.notebook )
+
+        #self.centralwidget.setLayout( hBoxlayout )
+        #self.centralwidget.resize( 600, 500 )
+
+        self.splitter = QtGui.QSplitter( QtCore.Qt.Horizontal )
+        self.splitter.addWidget( self.treeview )
+        self.splitter.addWidget( self.notebook )
+
+        self.setCentralWidget( self.splitter )
+
 
 
     # create the 1st tab

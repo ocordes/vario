@@ -34,13 +34,25 @@ class Vario_GUI( MainWindow ):
         self.addActions( self.fileMenu, self.fileMenuActions )
         self.connect( self.fileMenu, QtCore.SIGNAL( 'aboutToShow()' ), self.updateFileMenu )
 
+
+        # statusbar
+        self.statusbar = QtGui.QStatusBar( self )
+        self.setStatusBar( self.statusbar )
+
         # window content
         self.centralwidget = QtGui.QWidget( self )
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
+        self.centralwidget.setSizePolicy(sizePolicy)
         #hBoxlayout	= QtGui.QHBoxLayout( self.centralwidget )
-        hBoxlayout	= QtGui.QHBoxLayout()
+        hBoxlayout	= QtGui.QHBoxLayout( self.centralwidget )
 
 
         self.treeview = QtGui.QTreeView()
+        self.treeview.setMinimumSize(QtCore.QSize(200, 500))
+        self.treeview.setMaximumSize(QtCore.QSize(200, 16777215))
         #self.treeview.resize( 600, 100 )
 
         self.notebook = QtGui.QTabWidget()
@@ -59,11 +71,13 @@ class Vario_GUI( MainWindow ):
         #self.centralwidget.setLayout( hBoxlayout )
         #self.centralwidget.resize( 600, 500 )
 
-        self.splitter = QtGui.QSplitter( QtCore.Qt.Horizontal )
+        self.splitter = QtGui.QSplitter( self.centralwidget )
+        self.splitter.setOrientation( QtCore.Qt.Horizontal )
         self.splitter.addWidget( self.treeview )
         self.splitter.addWidget( self.notebook )
+        hBoxlayout.addWidget(self.splitter)
 
-        self.setCentralWidget( self.splitter )
+        self.setCentralWidget( self.centralwidget )
 
 
 

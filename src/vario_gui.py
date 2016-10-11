@@ -50,9 +50,11 @@ class Vario_GUI( MainWindow ):
         hBoxlayout	= QtGui.QHBoxLayout( self.centralwidget )
 
 
-        self.treeview = QtGui.QTreeView()
-        self.treeview.setMinimumSize(QtCore.QSize(200, 500))
-        self.treeview.setMaximumSize(QtCore.QSize(200, 16777215))
+        #self.treeview = QtGui.QTreeView()
+        #self.treeview.setMinimumSize(QtCore.QSize(200, 500))
+        #self.treeview.setMaximumSize(QtCore.QSize(200, 16777215))
+
+        self.treeview = self.create_treeview()
         #self.treeview.resize( 600, 100 )
 
         self.notebook = QtGui.QTabWidget()
@@ -79,6 +81,27 @@ class Vario_GUI( MainWindow ):
 
         self.setCentralWidget( self.centralwidget )
 
+
+    # create the treeview entries
+
+    def create_treeview( self ):
+        treeview = QtGui.QTreeWidget()
+        treeview.setMinimumSize(QtCore.QSize(200, 500))
+        treeview.setMaximumSize(QtCore.QSize(200, 16777215))
+
+        treeview.setColumnCount( 1 )
+        treeview.setHeaderLabels( ['Action' ] )
+
+        self.tv_project = QtGui.QTreeWidgetItem( treeview, [ 'Project' ] )
+        self.tv_files   = QtGui.QTreeWidgetItem( treeview, [ 'Files' ] )
+        file1 = QtGui.QTreeWidgetItem( self.tv_files, [ 'File 1' ] )
+        file2 = QtGui.QTreeWidgetItem( self.tv_files, [ 'File 2' ])
+        self.tv_sextractor = QtGui.QTreeWidgetItem( treeview, [ 'Secxtractor' ] )
+
+        #self.connect( treeview, QtCore.SIGNAL( 'itemClicked()' ), self.action_click )
+        treeview.itemSelectionChanged.connect( self.action_click )
+
+        return treeview
 
 
     # create the 1st tab
@@ -108,3 +131,6 @@ class Vario_GUI( MainWindow ):
 
     def fileNew( self ):
         print( 'File new')
+
+    def action_click( self ):
+        print( 'Action clicked' )
